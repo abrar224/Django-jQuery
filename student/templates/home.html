@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <title>Students</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center alert alert-success">STUDENT DATABASE</h2>
+        <div class="row">
+            <div class="col-sm-4">
+                <h4 class="text-center alert alert-info">Add Student</h4>
+                <form action="" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="button" class="btn btn-success" id="btn" value="Save">
+                </form>
+            </div>
+            <div class="col-sm-8">
+                <h4 class="text-center alert alert-info">Student Information</h4>
+                <table class="table table-hover">
+                    <thead>
+                        <tr> 
+                            <th>ID</th> 
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Batch</th>
+                            <th>Depertment</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        {% for s in std %}
+                        <tr>
+                            <td>{{s.id}}</td>
+                            <td>{{s.name}}</td>
+                            <td>{{s.email}}</td>
+                            <td>{{s.batch}}</td>
+                            <td>{{s.dept}}</td>
+                            <td>
+                                <input type="button" class="btn btn-danger btn-sm btn-del" data-id={{s.id}} value="Delete">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/bootstrap.js"></script>
+    <script src="static/js/popper.js"></script>
+    {% include 'ajax.html' %}
+</body>
+</html>
